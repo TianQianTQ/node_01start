@@ -4,27 +4,37 @@
 */
 var express = require('express');
 var fs = require('fs');
-var querystring = require('querystring');
+var querystring = require('querystring');   //url查询参数的解析
 var app = express();
 var mysql = require('mysql');
+//连接池    数据库连接消耗性能成本高
 var pool = mysql.createPool({
 	host    :'localhost',
 	port    :3306,
-	database:'mysql',
+	database:'test',
 	user    :'root',
 	password:'111111',
 });
+//监听
 app.get('/index.html',(req,res)=>{
 	res.writeHead(200,{'Content-Type':'text/html'});
 	res.write('<head><meta charset="utf-8"/><title>使用post方法向服务器端提交数据</title></head>');
     var file = fs.createReadStream('index.html');
-    file.pipe(res);
+    file.pipe(res);     //返回页面给客户端
 });
+
+/*app.get('/index.html',(req,res)=>{
+    res.sendfile(__dirname+'/index.html');
+});
+index中加入标准页面*/
+
 app.post('/index.html',(req,res)=>{
 	req.on('data',(data)=>{
 		var obj = querystring.parse(data.toString());
 		pool.getConnection((err,connection)=>{
-			if(err)  res.send('与mysql数据库建立连接失败');
+			if(err)  {res.send('与mysql数据库建立连接失败');
+             console.log(err);
+		}
 			else{
 				var str;
 				connection.query('INSERT INTO users SET ?',

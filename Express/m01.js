@@ -1,9 +1,9 @@
 //mysql数据库
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-	host:'localhost',
+	host:'127.0.0.1',
 	port:3306,
-	database:'mysql',
+	database:'test',
 	user:'root',
 	password:'111111',
 });
