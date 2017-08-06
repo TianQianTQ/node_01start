@@ -82,11 +82,6 @@ fs.readFile(path.join(__dirname, './markdown.css'), 'utf8', (error, css) => {
 
 ### 什么是流
 
-![二进制的世界](./img/01.png)
-
-
-- 现实过程的流
-  + 水流，人流
   
 - 在程序开发的概念中
   + 流是程序输入或输出的一个连续的字节序列
@@ -95,8 +90,6 @@ fs.readFile(path.join(__dirname, './markdown.css'), 'utf8', (error, css) => {
 
 
 ### Node中的流操作
-
-![流的操作](./img/02.png)
 
 在 Node 核心模块 fs 中定义了一些与流相关的 API
 
